@@ -1,10 +1,12 @@
 # Django "Min" Starter
 
-[![Django CI](https://github.com/Igonato/django-starter-min/actions/workflows/django.yml/badge.svg)][ci]
-[![codecov](https://codecov.io/gh/Igonato/django-starter-min/branch/master/graph/badge.svg?token=fwKGZIYWoL)](https://codecov.io/gh/Igonato/django-starter-min)
-[![Dependabot](https://api.dependabot.com/badges/status?host=github&repo=Igonato/django-starter-min)](#)
+[![Django CI](https://github.com/Igonato/django-starter/actions/workflows/django.yml/badge.svg)][ci]
+[![CodeQL](https://github.com/Igonato/django-starter/actions/workflows/codeql-analysis.yml/badge.svg)][ql]
+[![codecov](https://codecov.io/gh/Igonato/django-starter/branch/master/graph/badge.svg?token=sjg69emIfX)](https://codecov.io/gh/Igonato/django-starter)
+[![Dependabot](https://api.dependabot.com/badges/status?host=github&repo=Igonato/django-starter)](#)
 
-[ci]: https://github.com/Igonato/django-starter-min/actions/workflows/django.yml
+[ci]: https://github.com/Igonato/django-starter/actions/workflows/django.yml
+[ql]: https://github.com/Igonato/django-starter/actions/workflows/codeql-analysis.yml
 
 This is the light version of [Igonato/django-starter] containing only
 development tools and little to none changes to the vanilla startproject
@@ -27,7 +29,7 @@ You can click on "Use this template" at the top right or fork/clone the repo
 using Git:
 
 ```bash
-git clone git@github.com:Igonato/django-starter-min.git projectname
+git clone git@github.com:Igonato/django-starter.git projectname
 cd projectname
 git remote set-url origin git@github.com:teamname/projectname.git
 
