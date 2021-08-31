@@ -13,6 +13,7 @@ pytest-env = "*"
 pytest-xdist = {extras = ["psutil"], version = "*"}
 
 [dev-packages]
+django-debug-toolbar = "*"
 pytest-watch = "*"
 
 [scripts]
