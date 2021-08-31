@@ -24,7 +24,7 @@ jobs:
     env:
       PY_COLORS: '1'
       SECRET_KEY: cn2^51(@(iqco@@(%sbbe2_l=mg(z1+1#x(k_f5=!@#vowli4xd
-      ALLOWED_HOSTS: example.com
+      ALLOWED_HOSTS: .localhost 127.0.0.1 [::1]
 
     steps:
       - name: Set up Python ${{ matrix.python-version }}

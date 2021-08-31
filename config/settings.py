@@ -1,7 +1,7 @@
 """
 Django settings for the project.
 
-Created using https://github.com/Igonato/django-starter-env template.
+Created using https://github.com/Igonato/django-starter-min template.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/dev/topics/settings/
@@ -158,12 +158,18 @@ env('ADMINS', [], literal_eval)
 # Application definition
 
 INSTALLED_APPS = [
+    # Django apps:
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Third-party apps:
+
+    # Project apps:
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -332,3 +338,11 @@ LOGGING = {
         },
     }
 }
+
+# Custom user model
+# https://docs.djangoproject.com/en/dev/topics/auth/customizing/
+
+AUTH_USER_MODEL = 'users.User'
+
+LOGIN_URL = '/admin/login/'
+LOGIN_REDIRECT_URL = '/admin/'
