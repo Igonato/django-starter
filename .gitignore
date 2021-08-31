@@ -1,0 +1,44 @@
+###Python###
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# mypy
+.mypy_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.local.ipynb
+
+# Translations
+*.mo
+*.pot
+
+
+###Django###
+*.log
+*.sqlite3
+
+# celery beat schedule file
+celerybeat-schedule
+
+
+###Environments###
+.env
+.venv
+
+# pyenv
+.python-version
