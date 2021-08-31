@@ -1,0 +1,15 @@
+[run]
+omit =
+    manage.py
+    */apps.py
+
+[report]
+exclude_lines =
+    pragma: no cover
+    def __repr__
+    if os.name
+    if (.*)DEBUG:
+    if env\(
+    raise AssertionError
+    raise NotImplementedError
+

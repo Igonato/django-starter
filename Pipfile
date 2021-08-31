@@ -5,5 +5,16 @@ name = "pypi"
 
 [packages]
 django = "*"
+flake8 = "*"
+pytest = "*"
+pytest-cov = "*"
+pytest-django = "*"
+pytest-env = "*"
+pytest-xdist = {extras = ["psutil"], version = "*"}
 
 [dev-packages]
+pytest-watch = "*"
+
+[scripts]
+test = "pytest --numprocesses auto"
+test-watch = "ptw"

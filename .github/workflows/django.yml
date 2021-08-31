@@ -41,14 +41,15 @@ jobs:
       - name: Install project requirements
         run: pipenv install --deploy
 
-      - name: Install testing requirements
-        run: pipenv install pytest flake8
-
       - name: Run lint
         run: pipenv run flake8 --exclude migrations
 
       - name: Run tests
-        run: pipenv run pytest --doctest-modules
+        run: pipenv run test
 
       - name: Check settings defaults
         run: pipenv run python manage.py check --deploy --fail-level WARNING
+
+      - name: Upload coverage report to Codecov
+        run: bash <(curl -s https://codecov.io/bash)
+        if: ${{ matrix.os != 'windows-latest' }}
