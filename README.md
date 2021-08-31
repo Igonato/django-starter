@@ -1,23 +1,25 @@
-# Django "Env" Starter
+# Django "Min" Starter
 
-[![Django CI](https://github.com/Igonato/django-starter-env/actions/workflows/django.yml/badge.svg)][ci]
+[![Django CI](https://github.com/Igonato/django-starter-min/actions/workflows/django.yml/badge.svg)][ci]
+[![codecov](https://codecov.io/gh/Igonato/django-starter-min/branch/master/graph/badge.svg?token=fwKGZIYWoL)](https://codecov.io/gh/Igonato/django-starter-min)
+[![Dependabot](https://api.dependabot.com/badges/status?host=github&repo=Igonato/django-starter-min)](#)
 
-The bare-bones and unassuming version of [Igonato/django-starter]. Check out that
-repo for more versions, issues, and discussions. This repo is here exclusively
+[ci]: https://github.com/Igonato/django-starter-min/actions/workflows/django.yml
+
+This is the light version of [Igonato/django-starter] containing only
+development tools and little to none changes to the vanilla startproject
+template. Check out the [main][igonato/django-starter] repo for
+other versions, issues, and discussions. This repo is here exclusively
 to be used as a template.
 
-[ci]: https://github.com/Igonato/django-starter-env/actions/workflows/django.yml
 [igonato/django-starter]: https://github.com/Igonato/django-starter
-
-Minimalistic Django 3.2+ project starter. Kept close to the vanilla
-`django-admin startproject` output, no weird folder structure, no 3rd-party
-configuration tools, just a single `settings.py` with secure defaults and
-environment variables for secrets and things that can differ between the
-environments.
 
 ## Requirements
 
 -   Python 3.6+ ([automated tests][ci] run using three latest minor versions).
+-   [Pipenv] dependency management tool (Hint: You can `pip install pipenv`).
+
+[pipenv]: https://pipenv.pypa.io/en/latest/
 
 ## Quick Start
 
@@ -25,33 +27,34 @@ You can click on "Use this template" at the top right or fork/clone the repo
 using Git:
 
 ```bash
-git clone git@github.com:Igonato/django-starter-env.git projectname
+git clone git@github.com:Igonato/django-starter-min.git projectname
 cd projectname
 git remote set-url origin git@github.com:teamname/projectname.git
 
-# Set up a virtual environment*
-python -m venv .venv
-source .venv/bin/activate
-
-# Install requirements
-pip install Django
-
-# Load development settings*
+# Copy local settings from the example and edit if necessary
 cp .env.example .env
-set -o allexport; source .env; set +o allexport
+
+# Set up a virtual environment and install dependencies
+pipenv install --dev
 
 # Run migrations
-python manage.py migrate
+pipenv run migrate
 
-# Run development server
-python manage.py runserver
+# Start a development server
+pipenv run serve
 
-# *: these steps are different on Windows
+# Run tests once
+pipenv run test
+
+# Run tests and watch for changes
+pipenv run test-watch
 ```
 
 ## What's Inside?
 
-See the [diff] with a vanilla `django-admin startproject` output.
+### Inherited From the "Env" Starter
+
+See the [diff][ref_env] with a vanilla `django-admin startproject` output.
 
 Settings.py is changed to be secure by default (basically what you would
 get by following the official [deployment checklist]), accept environment
@@ -82,8 +85,30 @@ Additionally, the template comes with:
 -   `LICENSE` - 0BSD License for the template. You probably want to
     delete/replace the file.
 
-[diff]: https://github.com/Igonato/django-starter/compare/ref...env
+[ref_env]: https://github.com/Igonato/django-starter/compare/ref...env
 [deployment checklist]: https://docs.djangoproject.com/en/dev/howto/deployment/checklist/
+
+### This Starter Adds
+
+See the [diff][ref_min] with a vanilla `django-admin startproject` output,
+or here is the [diff][env_min] with [Igonato/django-starter-env].
+
+-   [Pipenv] for dependency management,
+-   `.editorconfig` and `.isort.cfg` for editor configuration,
+-   [pytest] with `pytest-cov`, `pytest-django`, `pytest-xdist`, etc...
+    for unit testing,
+-   [Django Debug Toolbar],
+-   [Django Extensions],
+-   Custom User model - often needed and AUTH_USER_MODEL needs to be set
+    before creating any migrations or running migrate for the first time
+    ([Docs](https://docs.djangoproject.com/en/dev/topics/auth/customizing/]))
+
+[env_min]: https://github.com/Igonato/django-starter/compare/env...min
+[ref_min]: https://github.com/Igonato/django-starter/compare/ref...min
+[igonato/django-starter-env]: https://github.com/Igonato/django-starter-env
+[pytest]: https://docs.pytest.org/
+[django debug toolbar]: https://django-debug-toolbar.readthedocs.io/
+[django extensions]: https://django-extensions.readthedocs.io/
 
 ## Deployment
 
@@ -108,6 +133,9 @@ Project Name is built using [Django Web Framework].
 ## Requirements
 
 -   Python 3.6+.
+-   [Pipenv] dependency management tool (Hint: You can `pip install pipenv`).
+
+[pipenv]: https://pipenv.pypa.io/en/latest/
 
 ## Installation
 
@@ -116,27 +144,53 @@ Project Name is built using [Django Web Framework].
 git clone git@github.com:teamname/projectname.git
 cd projectname
 
-# Copy .env.example to .env and edit it if necessary
+# Copy local settings from the example and edit if necessary
 cp .env.example .env
 
-# Set up a virtual environment
-python -m venv .venv
-source .venv/bin/activate
+# Set up a virtual environment and install dependencies
+pipenv install --dev
 
-# Install the requirements
-pip install -r requirements.txt
-
-# Run the migrations
-python manage.py migrate
+# Run migrations
+pipenv run migrate
 ```
 
 ## Development
 
-You can start the Django development server by activating the virtual
-environment and using the `runserver` command:
+You can start the Django development server by using the `serve` script:
 
 ```bash
-source .venv/bin/activate
+pipenv run serve
+```
 
-python manage.py runserver
+Run tests once:
+
+```bash
+pipenv run test
+```
+
+Run tests and watch for file changes:
+
+```bash
+pipenv run test-watch
+```
+
+Start an interactive shell:
+
+```bash
+pipenv run shell
+```
+
+Open a Jupyter notebook:
+
+```bash
+pipenv run notebook
+```
+
+Note: with the current versions of Django and Django Extensions in order to work
+with models in the interactive mode you will need to add the following code at
+the start:
+
+```python
+import os
+os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
 ```

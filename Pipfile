@@ -19,6 +19,8 @@ notebook = "*"
 pytest-watch = "*"
 
 [scripts]
+makemigrations = "python manage.py makemigrations"
+migrate = "python manage.py migrate"
 notebook = "python manage.py shell_plus --notebook"
 serve = "python manage.py runserver"
 shell = "python manage.py shell_plus"
