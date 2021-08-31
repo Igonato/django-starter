@@ -182,7 +182,10 @@ if env('USE_CACHE_MIDDLEWARE', True, must_be_explicitly_false):
     MIDDLEWARE.append('django.middleware.cache.FetchFromCacheMiddleware')
 
 if DEBUG:
-    INSTALLED_APPS.append('debug_toolbar')
+    INSTALLED_APPS += [
+        'debug_toolbar',
+        'django_extensions',
+    ]
     MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
     DEBUG_TOOLBAR_CONFIG = {
         'SHOW_TOOLBAR_CALLBACK': lambda request: True,

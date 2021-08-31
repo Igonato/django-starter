@@ -14,8 +14,13 @@ pytest-xdist = {extras = ["psutil"], version = "*"}
 
 [dev-packages]
 django-debug-toolbar = "*"
+django-extensions = "*"
+notebook = "*"
 pytest-watch = "*"
 
 [scripts]
+notebook = "python manage.py shell_plus --notebook"
+serve = "python manage.py runserver"
+shell = "python manage.py shell_plus"
 test = "pytest --numprocesses auto"
 test-watch = "ptw"
