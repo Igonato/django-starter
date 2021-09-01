@@ -167,6 +167,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Third-party apps:
+    'django_celery_results',
 
     # Project apps:
     'users',
@@ -346,3 +347,12 @@ AUTH_USER_MODEL = 'users.User'
 
 LOGIN_URL = '/admin/login/'
 LOGIN_REDIRECT_URL = '/admin/'
+
+
+# Third-party apps settings
+
+# Celery
+# https://docs.celeryproject.org/
+
+env('CELERY_BROKER_URL', 'redis://localhost:6379/0')
+env('CELERY_RESULT_BACKEND', 'django-db')

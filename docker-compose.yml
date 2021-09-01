@@ -21,6 +21,28 @@ services:
       - DB_HOST=db
       - REDIS_HOST=redis
       - CACHE_LOCATION=redis://redis:${REDIS_PORT}/1
+      - CELERY_BROKER_URL=redis://redis:${REDIS_PORT}/2
+
+  celery:
+    profiles: ['dev']
+    build:
+      context: ./
+      dockerfile: ./devops/docker/django/Dockerfile
+      args:
+        IMAGE: python:${PYTHON_IMAGE_VERSION:-latest}
+    entrypoint: /app/devops/docker/django/entrypoint.sh
+    command: pipenv run celery
+    volumes:
+      - .:/app
+    depends_on:
+      - django
+    env_file:
+      - .env
+    environment:
+      - DB_HOST=db
+      - REDIS_HOST=redis
+      - CACHE_LOCATION=redis://redis:${REDIS_PORT}/1
+      - CELERY_BROKER_URL=redis://redis:${REDIS_PORT}/2
 
   db:
     profiles: ['db', 'dev']

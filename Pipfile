@@ -5,7 +5,9 @@ name = "pypi"
 
 [packages]
 atomicwrites = {version = "*",sys_platform = "== 'win32'"}
+celery = {extras = ["redis"], version = "*"}
 django = "*"
+django-celery-results = "*"
 django-redis = "*"
 flake8 = "*"
 mysqlclient = {version = "*",sys_platform = "!= 'darwin'"}
@@ -23,6 +25,7 @@ notebook = "*"
 pytest-watch = "*"
 
 [scripts]
+celery = "celery -A config worker -l INFO"
 makemigrations = "python manage.py makemigrations"
 migrate = "python manage.py migrate"
 notebook = "python manage.py shell_plus --notebook"
