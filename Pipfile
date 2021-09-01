@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 django = "*"
 flake8 = "*"
+mysqlclient = {version = "*",sys_platform = "!= 'darwin'"}
+psycopg2-binary = "*"
 pytest = "*"
 pytest-cov = "*"
 pytest-django = "*"

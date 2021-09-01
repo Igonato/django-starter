@@ -1,0 +1,42 @@
+---
+services:
+  django:
+    profiles: ['dev']
+    build:
+      context: ./
+      dockerfile: ./devops/docker/django/Dockerfile
+      args:
+        IMAGE: python:${PYTHON_IMAGE_VERSION:-latest}
+    entrypoint: /app/devops/docker/django/entrypoint.sh
+    command: pipenv run serve 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - '8000:8000'
+    depends_on:
+      - db
+    env_file:
+      - .env
+    environment:
+      - DB_HOST=db
+
+  db:
+    profiles: ['db', 'dev']
+    image: ${DB_IMAGE:-postgres}:${DB_IMAGE_VERSION:-latest}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - mysql_data:/var/lib/mysql
+    environment:
+      - POSTGRES_DB=${DB_NAME:-mydb}
+      - POSTGRES_USER=${DB_USER:-postgres}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-postgres}
+      - MYSQL_DATABASE=${DB_NAME:-mydb}
+      - MYSQL_USER=${DB_USER:-mysql}
+      - MYSQL_PASSWORD=${DB_PASSWORD:-mysql}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-mysql}
+    ports:
+      - '${DB_PORT:-5432}:${DB_PORT:-5432}'
+
+volumes:
+  postgres_data:
+  mysql_data:
