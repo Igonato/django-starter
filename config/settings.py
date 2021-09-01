@@ -168,6 +168,7 @@ INSTALLED_APPS = [
 
     # Third-party apps:
     'django_celery_results',
+    'rest_framework',
 
     # Project apps:
     'config',
@@ -206,7 +207,7 @@ APPEND_SLASH = False
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'config' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -255,6 +256,7 @@ CACHES = {
         'LOCATION': env('CACHE_LOCATION', ''),
         'KEY_PREFIX': env('CACHE_KEY_PREFIX', ''),
         'OPTIONS': env('CACHE_OPTIONS', {}, literal_eval),
+        'TIMEOUT': env('CACHE_TIMEOUT', 300, int),
     }
 }
 
@@ -342,6 +344,7 @@ LOGGING = {
     }
 }
 
+
 # Custom user model
 # https://docs.djangoproject.com/en/dev/topics/auth/customizing/
 
@@ -358,3 +361,38 @@ LOGIN_REDIRECT_URL = '/admin/'
 
 env('CELERY_BROKER_URL', 'redis://localhost:6379/0')
 env('CELERY_RESULT_BACKEND', 'django-db')
+
+
+# Django REST framework
+# https://www.django-rest-framework.org/
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    'DEFAULT_PAGINATION_CLASS':
+        'rest_framework.pagination.LimitOffsetPagination',
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAdminUser',
+    ],
+    'PAGE_SIZE': 100,
+}
+
+
+# Project-related settings
+
+META = {
+    'NAME': env('PROJECT_NAME', BASE_DIR.name),
+    'VERSION': env('PROJECT_VERSION', 'v0.0.1-alpha'),
+    'DESCRIPTION': """
+
+    Powered by [Django] and [Django REST framework].
+
+    Generated using [Igonato/django-starter] as a template.
+
+    [django]: https://www.djangoproject.com/
+    [django rest framework]: https://www.django-rest-framework.org/
+    [igonato/django-starter]: https://github.com/Igonato/django-starter
+
+    """,
+}

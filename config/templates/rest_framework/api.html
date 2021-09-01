@@ -1,0 +1,7 @@
+{% extends "rest_framework/base.html" %}
+{% load meta %}
+{% block branding %}
+    <a class="navbar-brand" href="/api/">
+        {% meta 'NAME' as app_name %}{{app_name|title}} {% meta 'VERSION' %} REST API
+    </a>
+{% endblock %}

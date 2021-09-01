@@ -16,11 +16,15 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
-from django.views.debug import default_urlconf
+from django.views.generic.base import RedirectView
+
+from .views import home
 
 urlpatterns = [
-    path('', default_urlconf),
+    path('', RedirectView.as_view(url='api/'), name='index'),
     path('admin/', admin.site.urls),
+    path('api/', home, name='api-root'),
+    path('api/auth/', include('rest_framework.urls')),
 ]
 
 if settings.DEBUG:

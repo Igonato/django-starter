@@ -8,10 +8,15 @@ atomicwrites = {version = "*",sys_platform = "== 'win32'"}
 celery = {extras = ["pytest", "redis"], version = "*"}
 django = "*"
 django-celery-results = "*"
+django-filter = "*"
 django-redis = "*"
+djangorestframework = "*"
+drf-nested-routers = "*"
 flake8 = "*"
+markdown = "*"
 mysqlclient = {version = "*",sys_platform = "!= 'darwin'"}
 psycopg2-binary = "*"
+pygments = "*"
 pytest = "*"
 pytest-cov = "*"
 pytest-django = "*"
