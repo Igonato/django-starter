@@ -170,6 +170,7 @@ INSTALLED_APPS = [
     'django_celery_results',
 
     # Project apps:
+    'config',
     'users',
 ]
 
@@ -233,6 +234,7 @@ DATABASES = {
         'HOST': env('DB_HOST', None),
         'PORT': env('DB_PORT', None),
         'CONN_MAX_AGE': env('DB_CONN_MAX_AGE', 0, int),
+        'AUTO_CREATE': env('DB_AUTO_CREATE', False, must_be_explicitly_true),
     }
 }
 

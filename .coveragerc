@@ -2,6 +2,7 @@
 omit =
     manage.py
     */apps.py
+    */management/commands/*
 
 [report]
 exclude_lines =
