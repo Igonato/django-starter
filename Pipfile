@@ -4,6 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+atomicwrites = {version = "*",sys_platform = "== 'win32'"}
 django = "*"
 flake8 = "*"
 mysqlclient = {version = "*",sys_platform = "!= 'darwin'"}

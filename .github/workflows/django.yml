@@ -15,18 +15,74 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
-          - macos-latest
-          - windows-latest
         python-version:
           - '3.7'
           - '3.8'
           - '3.9'
+        db:
+          - name: PostgreSQL
+            image: postgres
+            version: latest
+            engine: django.db.backends.postgresql
+            user: postgres
+            port: '5432'
+          - name: MySQL
+            image: mysql
+            version: latest
+            engine: django.db.backends.mysql
+            user: root
+            port: '3306'
+          - name: MariaDB
+            image: mariadb
+            version: latest
+            engine: django.db.backends.mysql
+            user: root
+            port: '3306'
+
+        include:
+          - os: ubuntu-latest
+            python-version: '3.9'
+            db:
+              name: SQLite
+              engine: django.db.backends.sqlite3
+          - os: windows-latest
+            python-version: '3.9'
+            db:
+              name: SQLite
+              engine: django.db.backends.sqlite3
+          - os: macos-latest
+            python-version: '3.9'
+            db:
+              name: SQLite
+              engine: django.db.backends.sqlite3
+
     env:
       PY_COLORS: '1'
       SECRET_KEY: cn2^51(@(iqco@@(%sbbe2_l=mg(z1+1#x(k_f5=!@#vowli4xd
       ALLOWED_HOSTS: .localhost 127.0.0.1 [::1]
 
+      DB_IMAGE: ${{ matrix.db.image }}
+      DB_IMAGE_VERSION: ${{ matrix.db.version }}
+      DB_ENGINE: ${{ matrix.db.engine }}
+      DB_PORT: ${{ matrix.db.port }}
+      DB_NAME: default
+      DB_USER: ${{ matrix.db.user }}
+      DB_PASSWORD: mypassword
+      DB_HOST: '127.0.0.1'
+
     steps:
+      - name: Check out the code
+        uses: actions/checkout@v2
+
+      - name: Start and wait for the database container
+        run: |
+          touch .env
+          docker-compose --profile db up -d
+          while ! nc -z $DB_HOST $DB_PORT; do
+            sleep 0.1
+          done
+        if: ${{ matrix.db.name != 'SQLite' }}
+
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v1
         with:
@@ -35,11 +91,8 @@ jobs:
       - name: Install Pipenv
         run: pip install pipenv
 
-      - name: Check out the code
-        uses: actions/checkout@v2
-
       - name: Install project requirements
-        run: pipenv install --deploy
+        run: pipenv install
 
       - name: Run lint
         run: pipenv run flake8 --exclude migrations

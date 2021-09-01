@@ -30,9 +30,8 @@ services:
       - POSTGRES_DB=${DB_NAME:-mydb}
       - POSTGRES_USER=${DB_USER:-postgres}
       - POSTGRES_PASSWORD=${DB_PASSWORD:-postgres}
+      - MYSQL_HOST=0.0.0.0
       - MYSQL_DATABASE=${DB_NAME:-mydb}
-      - MYSQL_USER=${DB_USER:-mysql}
-      - MYSQL_PASSWORD=${DB_PASSWORD:-mysql}
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-mysql}
     ports:
       - '${DB_PORT:-5432}:${DB_PORT:-5432}'
