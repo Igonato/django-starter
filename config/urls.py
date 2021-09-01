@@ -24,7 +24,8 @@ urlpatterns = [
     path('', RedirectView.as_view(url='api/'), name='index'),
     path('admin/', admin.site.urls),
     path('api/', home, name='api-root'),
-    path('api/auth/', include('rest_framework.urls')),
+    path('api/auth/browsable/', include('rest_framework.urls')),
+    path('api/auth/', include('rest_registration.api.urls')),
 ]
 
 if settings.DEBUG:

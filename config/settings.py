@@ -169,6 +169,7 @@ INSTALLED_APPS = [
     # Third-party apps:
     'django_celery_results',
     'rest_framework',
+    'rest_registration',
 
     # Project apps:
     'config',
@@ -316,7 +317,7 @@ env('EMAIL_HOST_USER', '')
 env('EMAIL_HOST_PASSWORD', '')
 env('EMAIL_USE_TLS', True, must_be_explicitly_false)
 
-env('DEFAULT_FROM_EMAIL', 'no-reply@localhost')
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', 'no-reply@localhost')
 env('SERVER_EMAIL', 'root@localhost')
 
 
@@ -376,6 +377,22 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAdminUser',
     ],
     'PAGE_SIZE': 100,
+}
+
+
+# Django REST registration
+# https://django-rest-registration.readthedocs.io/
+
+FRONT_END_ROOT = env('FRONT_END_ROOT', 'http://localhost:8000')
+REST_REGISTRATION = {
+    'REGISTER_VERIFICATION_URL': FRONT_END_ROOT + '/verify-registration/',
+    'RESET_PASSWORD_VERIFICATION_URL': FRONT_END_ROOT + '/reset-password/',
+    'REGISTER_EMAIL_VERIFICATION_URL': FRONT_END_ROOT + '/verify-email/',
+    'REGISTER_VERIFICATION_AUTO_LOGIN': True,
+    'REGISTER_VERIFICATION_ONE_TIME_USE': True,
+    'USER_PUBLIC_FIELDS': ('username', 'first_name', 'last_name'),
+    'USER_VERIFICATION_FLAG_FIELD': 'is_verified',
+    'VERIFICATION_FROM_EMAIL': DEFAULT_FROM_EMAIL,
 }
 
 
