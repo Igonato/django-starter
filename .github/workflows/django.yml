@@ -10,11 +10,9 @@ name: Django CI
 jobs:
   test:
     name: Tests
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        os:
-          - ubuntu-latest
         python-version:
           - '3.7'
           - '3.8'
@@ -38,24 +36,6 @@ jobs:
             engine: django.db.backends.mysql
             user: root
             port: '3306'
-
-        include:
-          - os: ubuntu-latest
-            python-version: '3.9'
-            db:
-              name: SQLite
-              engine: django.db.backends.sqlite3
-          - os: windows-latest
-            python-version: '3.9'
-            db:
-              name: SQLite
-              engine: django.db.backends.sqlite3
-          - os: macos-latest
-            python-version: '3.9'
-            db:
-              name: SQLite
-              engine: django.db.backends.sqlite3
-
     env:
       PY_COLORS: '1'
       SECRET_KEY: cn2^51(@(iqco@@(%sbbe2_l=mg(z1+1#x(k_f5=!@#vowli4xd
@@ -70,6 +50,9 @@ jobs:
       DB_PASSWORD: mypassword
       DB_HOST: '127.0.0.1'
 
+      REDIS_HOST: '127.0.0.1'
+      REDIS_PORT: '6379'
+
     steps:
       - name: Check out the code
         uses: actions/checkout@v2
@@ -81,7 +64,6 @@ jobs:
           while ! nc -z $DB_HOST $DB_PORT; do
             sleep 0.1
           done
-        if: ${{ matrix.db.name != 'SQLite' }}
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v1
@@ -105,4 +87,3 @@ jobs:
 
       - name: Upload coverage report to Codecov
         run: bash <(curl -s https://codecov.io/bash)
-        if: ${{ matrix.os != 'windows-latest' }}
