@@ -1,0 +1,48 @@
+---
+name: Django CI
+
+'on':
+  push:
+  pull_request:
+  schedule:
+    - cron: '0 0 * * 1'  # Weekly
+
+jobs:
+  test:
+    name: Tests
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+        python-version:
+          - '3.7'
+          - '3.8'
+          - '3.9'
+    env:
+      PY_COLORS: '1'
+      SECRET_KEY: cn2^51(@(iqco@@(%sbbe2_l=mg(z1+1#x(k_f5=!@#vowli4xd
+      ALLOWED_HOSTS: example.com
+
+    steps:
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install requirements
+        run: pip install Django pytest flake8
+
+      - name: Check out the code
+        uses: actions/checkout@v2
+
+      - name: Run lint
+        run: flake8 --exclude migrations
+
+      - name: Run tests
+        run: pytest --doctest-modules
+
+      - name: Check settings defaults
+        run: python manage.py check --deploy --fail-level WARNING
