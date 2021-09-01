@@ -19,23 +19,34 @@ services:
       - .env
     environment:
       - DB_HOST=db
+      - REDIS_HOST=redis
+      - CACHE_LOCATION=redis://redis:${REDIS_PORT}/1
 
   db:
     profiles: ['db', 'dev']
     image: ${DB_IMAGE:-postgres}:${DB_IMAGE_VERSION:-latest}
     volumes:
-      - postgres_data:/var/lib/postgresql/data
       - mysql_data:/var/lib/mysql
+      - postgres_data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=${DB_NAME:-mydb}
-      - POSTGRES_USER=${DB_USER:-postgres}
-      - POSTGRES_PASSWORD=${DB_PASSWORD:-postgres}
-      - MYSQL_HOST=0.0.0.0
       - MYSQL_DATABASE=${DB_NAME:-mydb}
+      - MYSQL_HOST=0.0.0.0
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-mysql}
+      - POSTGRES_DB=${DB_NAME:-mydb}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-postgres}
+      - POSTGRES_USER=${DB_USER:-postgres}
     ports:
       - '${DB_PORT:-5432}:${DB_PORT:-5432}'
 
+  redis:
+    profiles: ['db', 'dev']
+    image: redis:latest
+    volumes:
+      - redis_data:/data
+    ports:
+      - ${REDIS_PORT:-6379}:6379
+
 volumes:
-  postgres_data:
   mysql_data:
+  postgres_data:
+  redis_data:

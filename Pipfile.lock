@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "cd1236217e71a37b9bb93750319265a6a00be296357a2a19bd6371e76afea104"
+            "sha256": "36f53ce54f48e2ef5e3e38a4137eebbf692048e9b24b7e2185715505cdfa7399"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -103,6 +103,14 @@
             ],
             "index": "pypi",
             "version": "==3.2.7"
+        },
+        "django-redis": {
+            "hashes": [
+                "sha256:048f665bbe27f8ff2edebae6aa9c534ab137f1e8fa7234147ef470df3f3aa9b8",
+                "sha256:97739ca9de3f964c51412d1d7d8aecdfd86737bb197fce6e1ff12620c63c97ee"
+            ],
+            "index": "pypi",
+            "version": "==5.0.0"
         },
         "execnet": {
             "hashes": [
@@ -318,6 +326,14 @@
                 "sha256:eb10ce3e7736052ed3623d49975ce333bcd712c7bb19a58b9e2089d4057d0798"
             ],
             "version": "==2021.1"
+        },
+        "redis": {
+            "hashes": [
+                "sha256:0e7e0cfca8660dea8b7d5cd8c4f6c5e29e11f31158c0b0ae91a397f00e5a05a2",
+                "sha256:432b788c4530cfe16d8d943a09d40ca6c16149727e4afe8c2c9d5580c59d9f24"
+            ],
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'",
+            "version": "==3.5.3"
         },
         "sqlparse": {
             "hashes": [
