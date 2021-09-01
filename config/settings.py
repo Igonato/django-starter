@@ -1,7 +1,7 @@
 """
 Django settings for the project.
 
-Created using https://github.com/Igonato/django-starter-min template.
+Created using https://github.com/Igonato/django-starter template.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/dev/topics/settings/

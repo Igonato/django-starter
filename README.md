@@ -1,20 +1,31 @@
-# Django "Min" Starter
+# Django Starter
 
-[![Django CI](https://github.com/Igonato/django-starter/actions/workflows/django.yml/badge.svg)][ci]
-[![CodeQL](https://github.com/Igonato/django-starter/actions/workflows/codeql-analysis.yml/badge.svg)][ql]
-[![codecov](https://codecov.io/gh/Igonato/django-starter/branch/master/graph/badge.svg?token=sjg69emIfX)](https://codecov.io/gh/Igonato/django-starter)
-[![Dependabot](https://api.dependabot.com/badges/status?host=github&repo=Igonato/django-starter)](#)
+Near-zero configuration project template. Complete with all the necessary
+development tools and deployment solutions.
 
+Multiple versions with incremental changes:
+
+-   **ref** - Django 3.2.6 `django-admin startproject` output for reference,
+-   **env** - production-ready settings through the environment variables,
+-   **min** - essential development tools and setup,
+-   **master** - batteries-included starter.
+
+| Branch | ref                | env                | min                | Badges                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ------ | ------------------ | ------------------ | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| env    | [diff][ref_env]    | -                  | -                  | [![Django CI](https://github.com/Igonato/django-starter-env/actions/workflows/django.yml/badge.svg)][env_ci]                                                                                                                                                                                                                                                                                                                                                                 |
+| min    | [diff][ref_min]    | [diff][env_min]    | -                  | [![Django CI](https://github.com/Igonato/django-starter-min/actions/workflows/django.yml/badge.svg)][min_ci] [![codecov](https://codecov.io/gh/Igonato/django-starter-min/branch/master/graph/badge.svg?token=fwKGZIYWoL)](https://codecov.io/gh/Igonato/django-starter-min) [![Dependabot](https://api.dependabot.com/badges/status?host=github&repo=Igonato/django-starter-min)](#)                                                                                        |
+| master | [diff][ref_master] | [diff][env_master] | [diff][min_master] | [![Django CI](https://github.com/Igonato/django-starter/actions/workflows/django.yml/badge.svg)][ci] [![CodeQL](https://github.com/Igonato/django-starter/actions/workflows/codeql-analysis.yml/badge.svg)][ql] [![codecov](https://codecov.io/gh/Igonato/django-starter/branch/master/graph/badge.svg?token=sjg69emIfX)](https://codecov.io/gh/Igonato/django-starter) [![Dependabot](https://api.dependabot.com/badges/status?host=github&repo=Igonato/django-starter)](#) |
+
+[ref_env]: https://github.com/Igonato/django-starter/compare/ref...env
+[ref_min]: https://github.com/Igonato/django-starter/compare/ref...min
+[ref_master]: https://github.com/Igonato/django-starter/compare/ref...master
+[env_min]: https://github.com/Igonato/django-starter/compare/env...min
+[env_master]: https://github.com/Igonato/django-starter/compare/env...master
+[min_master]: https://github.com/Igonato/django-starter/compare/min...master
+[env_ci]: https://github.com/Igonato/django-starter-env/actions/workflows/django.yml
+[min_ci]: https://github.com/Igonato/django-starter-min/actions/workflows/django.yml
 [ci]: https://github.com/Igonato/django-starter/actions/workflows/django.yml
 [ql]: https://github.com/Igonato/django-starter/actions/workflows/codeql-analysis.yml
-
-This is the light version of [Igonato/django-starter] containing only
-development tools and little to none changes to the vanilla startproject
-template. Check out the [main][igonato/django-starter] repo for
-other versions, issues, and discussions. This repo is here exclusively
-to be used as a template.
-
-[igonato/django-starter]: https://github.com/Igonato/django-starter
 
 ## Requirements
 
@@ -87,7 +98,6 @@ Additionally, the template comes with:
 -   `LICENSE` - 0BSD License for the template. You probably want to
     delete/replace the file.
 
-[ref_env]: https://github.com/Igonato/django-starter/compare/ref...env
 [deployment checklist]: https://docs.djangoproject.com/en/dev/howto/deployment/checklist/
 
 ### This Starter Adds
@@ -105,8 +115,6 @@ or here is the [diff][env_min] with [Igonato/django-starter-env].
     before creating any migrations or running migrate for the first time
     ([Docs](https://docs.djangoproject.com/en/dev/topics/auth/customizing/]))
 
-[env_min]: https://github.com/Igonato/django-starter/compare/env...min
-[ref_min]: https://github.com/Igonato/django-starter/compare/ref...min
 [igonato/django-starter-env]: https://github.com/Igonato/django-starter-env
 [pytest]: https://docs.pytest.org/
 [django debug toolbar]: https://django-debug-toolbar.readthedocs.io/
