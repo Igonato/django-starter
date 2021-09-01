@@ -25,7 +25,7 @@ notebook = "*"
 pytest-watch = "*"
 
 [scripts]
-celery = "celery -A config worker -l INFO"
+celery = "python manage.py runcelery"
 makemigrations = "python manage.py makemigrations"
 migrate = "python manage.py migrate"
 notebook = "python manage.py shell_plus --notebook"
