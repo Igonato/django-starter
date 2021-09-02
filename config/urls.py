@@ -13,6 +13,9 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from importlib.util import find_spec
+
+from django.apps import apps
 from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
@@ -24,9 +27,16 @@ urlpatterns = [
     path('', RedirectView.as_view(url='api/'), name='index'),
     path('admin/', admin.site.urls),
     path('api/', home, name='api-root'),
-    path('api/auth/browsable/', include('rest_framework.urls')),
-    path('api/auth/', include('rest_registration.api.urls')),
 ]
+
+# Automatically add urls form urls.py for installed project apps
+for app in apps.get_app_configs():
+    if str(settings.BASE_DIR) not in app.path:
+        continue
+
+    module = app.name + '.urls'
+    if find_spec(module) is not None and module != __name__:
+        urlpatterns += [path('', include(module))]
 
 if settings.DEBUG:
     import debug_toolbar
