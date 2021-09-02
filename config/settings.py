@@ -390,7 +390,7 @@ REST_REGISTRATION = {
     'REGISTER_EMAIL_VERIFICATION_URL': FRONT_END_ROOT + '/verify-email/',
     'REGISTER_VERIFICATION_AUTO_LOGIN': True,
     'REGISTER_VERIFICATION_ONE_TIME_USE': True,
-    'USER_PUBLIC_FIELDS': ('username', 'first_name', 'last_name'),
+    'USER_PUBLIC_FIELDS': ('username', 'first_name', 'last_name', 'email'),
     'USER_VERIFICATION_FLAG_FIELD': 'is_verified',
     'VERIFICATION_FROM_EMAIL': DEFAULT_FROM_EMAIL,
 }
