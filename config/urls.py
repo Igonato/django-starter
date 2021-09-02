@@ -31,7 +31,7 @@ urlpatterns = [
 
 # Automatically add urls form urls.py for installed project apps
 for app in apps.get_app_configs():
-    if str(settings.BASE_DIR) not in app.path:
+    if not app.path.startswith(str(settings.BASE_DIR)):
         continue
 
     module = app.name + '.urls'

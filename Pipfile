@@ -22,7 +22,9 @@ pytest = "*"
 pytest-cov = "*"
 pytest-django = "*"
 pytest-env = "*"
+pytest-factoryboy = "*"
 pytest-xdist = {extras = ["psutil"], version = "*"}
+requests = "*"
 
 [dev-packages]
 django-debug-toolbar = "*"

@@ -13,4 +13,4 @@ exclude_lines =
     if env\(
     raise AssertionError
     raise NotImplementedError
-
+    = lambda: None

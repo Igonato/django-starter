@@ -77,7 +77,7 @@ jobs:
         run: pipenv install
 
       - name: Run lint
-        run: pipenv run flake8 --exclude migrations
+        run: pipenv run flake8 --ignore=E731 --exclude migrations
 
       - name: Run tests
         run: pipenv run test

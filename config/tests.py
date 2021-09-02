@@ -21,3 +21,4 @@ def test_meta_template_tag(client):
 def test_api_root(client):
     res = client.get(reverse('api-root'))
     assert res.status_code == HTTPStatus.OK
+    assert 'auth' in res.json()

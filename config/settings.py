@@ -413,3 +413,17 @@ META = {
 
     """,
 }
+
+# OAuth 2.0 config
+OAUTH_PROVIDERS = env('OAUTH_PROVIDERS', '')
+OAUTH = {
+    provider.lower(): {
+        'auth_uri': env(provider + '_AUTH_URI'),
+        'client_id': env(provider + '_CLIENT_ID'),
+        'client_secret': env(provider + '_CLIENT_SECRET'),
+        'scope': env(provider + '_SCOPE', ''),
+        'token_uri': env(provider + '_TOKEN_URI'),
+    }
+    for provider in OAUTH_PROVIDERS.upper().split()
+}
+env('OAUTH_STATE_MAX_AGE', 3600, int)
