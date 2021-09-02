@@ -20,6 +20,7 @@ services:
     environment:
       - DB_HOST=db
       - REDIS_HOST=redis
+      - EMAIL_HOST=mailhog
       - CACHE_LOCATION=redis://redis:${REDIS_PORT}/1
       - CELERY_BROKER_URL=redis://redis:${REDIS_PORT}/2
 
@@ -41,6 +42,7 @@ services:
     environment:
       - DB_HOST=db
       - REDIS_HOST=redis
+      - EMAIL_HOST=mailhog
       - CACHE_LOCATION=redis://redis:${REDIS_PORT}/1
       - CELERY_BROKER_URL=redis://redis:${REDIS_PORT}/2
 
@@ -67,6 +69,13 @@ services:
       - redis_data:/data
     ports:
       - ${REDIS_PORT:-6379}:6379
+
+  mailhog:
+    profiles: ['mailhog', 'dev']
+    image: mailhog/mailhog
+    ports:
+       - 1025:1025  # smtp server
+       - 8025:8025  # web ui
 
 volumes:
   mysql_data:
